@@ -7,3 +7,4 @@ coverage/
 .env*
 !.env.example
 .env .env.* !.env.example node_modules/ dist/
+public/
