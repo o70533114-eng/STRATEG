@@ -753,15 +753,10 @@ async function startServer() {
       appType: 'spa',
     });
     app.use(vite.middlewares);
-  } else {
-    app.use(express.static(path.resolve(__dirname, 'dist')));
-    app.get('*', (_req, res) => {
-      res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
-    });
   }
 
   app.listen(PORT, () => {
-    console.log(`СТРАТЕГ server running on http://0.0.0.0:${PORT} (Gemini API: ${ai ? 'active' : 'fallback mode'})`);
+    console.log("СТРАТЕГ server running on port ${PORT}");
   });
 }
 
