@@ -745,19 +745,20 @@ ${JSON.stringify(chain, null, 2)}
 
 // Vite middleware in dev or static files in production
 async function startServer() {
-  const isProd = process.env.NODE_ENV === 'production';
+  const vite = await createViteServer({
+    server: { middlewareMode: true },
+    appType: 'spa',
+  });
 
-  if (!isProd) {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-  }
+  app.use(vite.middlewares);
 
   app.listen(PORT, () => {
     console.log("СТРАТЕГ server running on port ${PORT}");
   });
 }
 
-startServer();
+if (process.env.NODE_ENV !== 'production') {
+  startServer();
+}
+
+export default app;
